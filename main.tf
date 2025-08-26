@@ -40,7 +40,7 @@ provider "azurerm" {
       purge_soft_delete_on_destroy = true
     }
   }
-  subscription_id = "68be2809-9674-447c-a43d-261ef2862c29" # replace with your spoke subscription ID
+  subscription_id = "0450884c-0ba2-44d8-81e5-ab63e21fe7b8" # replace with your spoke subscription ID
 }
 
 module "naming" {
