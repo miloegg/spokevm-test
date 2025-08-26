@@ -33,3 +33,9 @@ FeatureName      ProviderName      RegistrationState
 EncryptionAtHost Microsoft.Compute Registered
 
 ```
+
+## may require manual import of resource provider
+
+```
+jzwong ~/Library/CloudStorage/OneDrive-Microsoft/git/bdo/spokevm-test [main] $ terraform import azurerm_resource_provider_registration.hostencryptprovider "/subscriptions/0450884c-0ba2-44d8-81e5-ab63e21fe7b8/providers/Microsoft.Compute"
+```

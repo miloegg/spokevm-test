@@ -27,7 +27,8 @@ provider "azurerm" {
       purge_soft_delete_on_destroy = true
     }
   }
-  subscription_id = "0fb0d3b2-5b3a-4db0-8e5e-d5459592651d" # replace with your tfstate subscription ID
+  subscription_id                 = "0fb0d3b2-5b3a-4db0-8e5e-d5459592651d" # replace with your tfstate subscription ID
+  resource_provider_registrations = "none"
 }
 
 provider "azurerm" {
@@ -40,7 +41,18 @@ provider "azurerm" {
       purge_soft_delete_on_destroy = true
     }
   }
-  subscription_id = "0450884c-0ba2-44d8-81e5-ab63e21fe7b8" # replace with your spoke subscription ID
+  subscription_id                 = "0450884c-0ba2-44d8-81e5-ab63e21fe7b8" # replace with your spoke subscription ID
+  resource_provider_registrations = "none"
+}
+
+resource "azurerm_resource_provider_registration" "hostencryptprovider" {
+  provider = azurerm.spoke
+  name     = "Microsoft.Compute"
+
+  feature {
+    name       = "EncryptionAtHost"
+    registered = true
+  }
 }
 
 module "naming" {
@@ -280,6 +292,16 @@ module "testnsg" {
       "nsg_rule_source_port_range" : "*"
     },
     "rule02" : {
+      "nsg_rule_access" : "Allow",
+      "nsg_rule_destination_address_prefix" : "*",
+      "nsg_rule_destination_port_range" : "80",
+      "nsg_rule_direction" : "Inbound",
+      "nsg_rule_priority" : 110,
+      "nsg_rule_protocol" : "Tcp",
+      "nsg_rule_source_address_prefix" : "*",
+      "nsg_rule_source_port_range" : "*"
+    },
+    "rule03" : {
       "nsg_rule_access" : "Allow",
       "nsg_rule_destination_address_prefix" : "*",
       "nsg_rule_destination_port_range" : "*",

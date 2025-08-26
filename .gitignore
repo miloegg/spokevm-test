@@ -2,6 +2,7 @@ tfplan
 *.tfplan
 *.tfstate
 *.tfstate.backup
+*.cache
 
 # Local .terraform directories
 .terraform/
