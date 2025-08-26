@@ -29,6 +29,7 @@ module "agw_naming" {
 # }
 
 resource "azurerm_web_application_firewall_policy" "example" {
+  provider            = azurerm.spoke
   name                = "example-wafpolicy"
   location            = local.deployment_region
   resource_group_name = azurerm_resource_group.this_rg.name
@@ -41,6 +42,10 @@ resource "azurerm_web_application_firewall_policy" "example" {
 }
 
 module "application_gateway" {
+  providers = {
+    azurerm = azurerm.spoke
+  }
+
   source  = "Azure/avm-res-network-applicationgateway/azurerm"
   version = "0.4.3"
 
