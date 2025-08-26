@@ -11,3 +11,4 @@ tfplan
 
 *.tfvars
 *.tfvars.json
+*.json
